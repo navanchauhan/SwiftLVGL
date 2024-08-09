@@ -2,6 +2,8 @@
 
 Yet another Swift wrapper for LVGL
 
+![image](https://github.com/user-attachments/assets/98976e76-6313-433d-937c-ee403b36b097)
+
 ```swift
 @main
 struct Main {
