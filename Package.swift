@@ -16,6 +16,9 @@ let package = Package(
     .library(name: "CLVGL", targets: ["CLVGL"]),
     .library(name: "SwiftLVGL", targets: ["SwiftLVGL"]),
   ],
+  dependencies: [
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
+  ],
   targets: [
     .target(
       name: "CLVGL",
