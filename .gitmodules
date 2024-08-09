@@ -1,3 +1,4 @@
 [submodule "Sources/lvgl"]
 	path = Sources/lvgl
 	url = https://github.com/lvgl/lvgl
+    branch = v9.1.0
