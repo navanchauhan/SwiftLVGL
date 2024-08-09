@@ -1,6 +1,10 @@
 import CLVGL
 import SwiftLVGL
 
+#if canImport(Glibc)
+  import Glibc
+#endif
+
 @main
 struct Main {
   static func main() {
