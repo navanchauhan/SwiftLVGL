@@ -1,0 +1,5 @@
+module CLVGL {
+    umbrella header "shim.h"
+    link "lvgl"
+    export *
+}
