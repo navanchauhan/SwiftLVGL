@@ -1,6 +1,6 @@
 //
 //  LVGLObjectProtocol.swift
-//  
+//
 //
 //  Created by Navan Chauhan on 8/9/24.
 //
@@ -8,39 +8,39 @@
 import CLVGL
 
 public protocol LVGLObjectProtocol {
-    var pointer: UnsafeMutablePointer<lv_obj_t>? { get set }
+  var pointer: UnsafeMutablePointer<lv_obj_t>? { get set }
 
-    func setPosition(x: Int32)
-    func setPosition(y: Int32)
-    func setPosition(x: Int32, y: Int32)
+  func setPosition(x: Int32)
+  func setPosition(y: Int32)
+  func setPosition(x: Int32, y: Int32)
 
-    func setSize(width: Int32, height: Int32)
-    func setSize(height: Int32)
-    func setSize(width: Int32)
+  func setSize(width: Int32, height: Int32)
+  func setSize(height: Int32)
+  func setSize(width: Int32)
 
-    func getDimension(dimension: LVGLDimension) -> Int32
-    func getContentDimension(dimension: LVGLDimension) -> Int32
-    func getSelfDimension(dimension: LVGLDimension) -> Int32
+  func getDimension(dimension: LVGLDimension) -> Int32
+  func getContentDimension(dimension: LVGLDimension) -> Int32
+  func getSelfDimension(dimension: LVGLDimension) -> Int32
 
-    func setContentSize(width: Int32, height: Int32)
-    func setContentSize(width: Int32)
-    func setContentSize(height: Int32)
+  func setContentSize(width: Int32, height: Int32)
+  func setContentSize(width: Int32)
+  func setContentSize(height: Int32)
 
-    func align(alignment: LVAlignment)
-    func align(alignment: LVAlignment, xOffset: Int32, yOffset: Int32)
-    func center()
+  func align(alignment: LVAlignment)
+  func align(alignment: LVAlignment, xOffset: Int32, yOffset: Int32)
+  func center()
 
-    func getParent() -> UnsafeMutablePointer<lv_obj_t>?
-    func setParent(parentPointer: UnsafeMutablePointer<lv_obj_t>)
+  func getParent() -> UnsafeMutablePointer<lv_obj_t>?
+  func setParent(parentPointer: UnsafeMutablePointer<lv_obj_t>)
 
-    func setCallback(
-        eventType: LVEventCode, _ callback: @escaping (UnsafeMutablePointer<lv_event_t>?) -> Void)
-    func removeCallback()
+  func setCallback(
+    eventType: LVEventCode, _ callback: @escaping (UnsafeMutablePointer<lv_event_t>?) -> Void)
+  func removeCallback()
 
-    mutating func delete()
-    func exists() -> Bool
+  mutating func delete()
+  func exists() -> Bool
 
-    /*
+  /*
     TODO:
     func refreshSize() -> bool // lv_obj_refr_size
     func setLayout(layout: UInt32) // lv_obj_set_layout
