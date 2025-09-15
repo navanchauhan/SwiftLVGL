@@ -17,7 +17,7 @@ public protocol LVGLLabelProtocol: LVGLObjectProtocol {
 /// A struct representing an LVGL label object.
 public struct LVGLLabel: LVGLLabelProtocol {
   /// The pointer to the underlying LVGL object.
-  public var pointer: UnsafeMutablePointer<lv_obj_t>?
+  public var pointer: OpaquePointer?
 
   /// Creates a new LVGL label.
   /// - Parameters:

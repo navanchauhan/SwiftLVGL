@@ -10,7 +10,7 @@ import CLVGL
 /// A global dictionary that stores callback functions for LVGL objects.
 ///
 /// The key is a raw pointer to the LVGL object, and the value is the callback function.
-public var callbackStore: [UnsafeMutableRawPointer: (UnsafeMutablePointer<lv_event_t>?) -> Void] =
+public var callbackStore: [UnsafeMutableRawPointer: (OpaquePointer?) -> Void] =
   [:]
 
 /// A C-compatible callback function that bridges LVGL events to Swift callbacks.
@@ -19,7 +19,7 @@ public var callbackStore: [UnsafeMutableRawPointer: (UnsafeMutablePointer<lv_eve
 /// Swift callback in the `callbackStore` based on the event target, and then calls that callback.
 ///
 /// - Parameter event: A pointer to the LVGL event structure.
-public func cCallback(_ event: UnsafeMutablePointer<lv_event_t>?) {
+public func cCallback(_ event: OpaquePointer?) {
   guard let event = event else { return }
   let target = lv_event_get_target(event)
   if let targetPointer = UnsafeMutableRawPointer(target),

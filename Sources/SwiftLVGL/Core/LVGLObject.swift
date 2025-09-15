@@ -110,7 +110,7 @@ extension LVGLObjectProtocol {
   /// Aligns the object according to the specified alignment.
   /// - Parameter alignment: The alignment to apply.
   public func align(alignment: LVAlignment) {
-    lv_obj_set_align(pointer, alignment.rawValue)
+    lv_obj_set_align(pointer, CLVGL.lv_align_t(UInt32(alignment.rawValue)))
   }
 
   /// Aligns the object with an offset.
@@ -119,7 +119,7 @@ extension LVGLObjectProtocol {
   ///   - xOffset: The x-offset from the aligned position.
   ///   - yOffset: The y-offset from the aligned position.
   public func align(alignment: LVAlignment, xOffset: Int32, yOffset: Int32) {
-    lv_obj_align(pointer, alignment.rawValue, xOffset, yOffset)
+    lv_obj_align(pointer, CLVGL.lv_align_t(UInt32(alignment.rawValue)), xOffset, yOffset)
   }
 
   /// Centers the object within its parent.
@@ -129,14 +129,14 @@ extension LVGLObjectProtocol {
 
   /// Gets the parent object.
   /// - Returns: A pointer to the parent object, or nil if there is no parent.
-  public func getParent() -> UnsafeMutablePointer<lv_obj_t>? {
-    let parentPointer: UnsafeMutablePointer<lv_obj_t>? = lv_obj_get_parent(pointer)
+  public func getParent() -> OpaquePointer? {
+    let parentPointer: OpaquePointer? = lv_obj_get_parent(pointer)
     return parentPointer
   }
 
   /// Sets the parent of the object.
   /// - Parameter parentPointer: A pointer to the new parent object.
-  public func setParent(parentPointer: UnsafeMutablePointer<lv_obj_t>) {
+  public func setParent(parentPointer: OpaquePointer) {
     lv_obj_set_parent(pointer, parentPointer)
   }
 
@@ -146,9 +146,10 @@ extension LVGLObjectProtocol {
   ///   - callback: The callback function to be called when the event occurs.
   public func setCallback(
     eventType: LVEventCode,
-    callback: @escaping (UnsafeMutablePointer<lv_event_t>?) -> Void
+    callback: @escaping (OpaquePointer?) -> Void
   ) {
-    callbackStore[UnsafeMutableRawPointer(pointer!)] = callback
+    guard let pointer = pointer else { return }
+    callbackStore[UnsafeMutableRawPointer(pointer)] = callback
 
     lv_obj_add_event_cb(
       pointer,
@@ -160,7 +161,8 @@ extension LVGLObjectProtocol {
 
   /// Removes the previously set callback.
   public func removeCallback() {
-    callbackStore.removeValue(forKey: UnsafeMutableRawPointer(pointer!))
+    guard let pointer = pointer else { return }
+    callbackStore.removeValue(forKey: UnsafeMutableRawPointer(pointer))
   }
 
   /// Deletes the object.

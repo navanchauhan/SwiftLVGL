@@ -1,8 +1,15 @@
 // swift-tools-version: 5.10
 import PackageDescription
 
-let lvConfPath: String =
-  Context.environment["LV_CONF_PATH"] ?? "\(Context.packageDirectory)/Sources/CLVGL/lv_conf.h"
+let lvConfPathDefault = "\(Context.packageDirectory)/Sources/CLVGL/lv_conf.h"
+let lvConfPathEnv = Context.environment["LV_CONF_PATH"]
+let lvConfPathRaw = lvConfPathEnv ?? lvConfPathDefault
+let lvConfPathDefine: String
+if lvConfPathRaw.hasPrefix("\"") && lvConfPathRaw.hasSuffix("\"") {
+  lvConfPathDefine = lvConfPathRaw
+} else {
+  lvConfPathDefine = "\"\(lvConfPathRaw)\""
+}
 
 #if os(macOS)
   let sdlCFlags = [Context.environment["SDL_INCLUDE_PATH"] ?? "-I/opt/homebrew/include"]
@@ -28,7 +35,7 @@ let package = Package(
         .headerSearchPath("lvgl"),
         .headerSearchPath("."),
         .define("LV_CONF_INCLUDE_SIMPLE"),
-        .define("LV_CONF_PATH", to: lvConfPath),
+        .define("LV_CONF_PATH", to: lvConfPathDefine),
         .unsafeFlags(sdlCFlags),
       ],
       linkerSettings: [.unsafeFlags(["-L/opt/homebrew/lib", "-lSDL2"])]

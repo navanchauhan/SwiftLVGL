@@ -15,7 +15,7 @@ public protocol LVGLSwitchProtocol: LVGLObjectProtocol {
 
 public struct LVGLSwitch: LVGLSwitchProtocol {
   public var checked: Bool
-  public var pointer: UnsafeMutablePointer<lv_obj_t>?
+  public var pointer: OpaquePointer?
 
   public init(
     _ checked: Bool = false, alignment: LVAlignment = .center, xOffset: Int32 = 0,
