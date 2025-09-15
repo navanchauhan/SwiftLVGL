@@ -17,7 +17,7 @@ public struct LVGLButton: LVGLButtonProtocol {
   public let label: LVGLLabel
 
   /// The pointer to the underlying LVGL object.
-  public var pointer: UnsafeMutablePointer<lv_obj_t>?
+  public var pointer: OpaquePointer?
 
   /// Creates a new LVGL button.
   /// - Parameters:
@@ -39,7 +39,7 @@ public struct LVGLButton: LVGLButtonProtocol {
     xOffset: Int32 = 0,
     yOffset: Int32 = 0,
     eventType: LVEventCode = .all,
-    callback: @escaping (UnsafeMutablePointer<lv_event_t>?) -> Void = { _ in }
+    callback: @escaping (OpaquePointer?) -> Void = { _ in }
   ) {
     guard let button = lv_button_create(lv_screen_active()) else {
       fatalError("Failed to create button")
@@ -51,7 +51,9 @@ public struct LVGLButton: LVGLButtonProtocol {
       xOffset: xOffset,
       yOffset: yOffset
     )
-    self.label.setParent(parentPointer: pointer!)
+    if let pointer {
+      self.label.setParent(parentPointer: pointer)
+    }
     align(alignment: alignment, xOffset: xOffset, yOffset: yOffset)
     setSize(width: xSize, height: ySize)
     setCallback(eventType: eventType, callback: callback)

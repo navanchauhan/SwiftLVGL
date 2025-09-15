@@ -12,7 +12,7 @@ public protocol LVGLSpinnerProtocol: LVGLObjectProtocol {
 }
 
 public struct LVGLSpinner: LVGLSpinnerProtocol {
-  public var pointer: UnsafeMutablePointer<lv_obj_t>?
+  public var pointer: OpaquePointer?
 
   public init(
     animationTime: UInt32 = 100,

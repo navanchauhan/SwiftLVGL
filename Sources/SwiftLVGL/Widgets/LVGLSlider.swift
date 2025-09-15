@@ -13,7 +13,7 @@ public protocol LVGLSliderProtocol: LVGLObjectProtocol {
 
 public struct LVGLSlider: LVGLSliderProtocol {
   public let label: LVGLLabel
-  public var pointer: UnsafeMutablePointer<lv_obj_t>?
+  public var pointer: OpaquePointer?
 
   public init(
     _ text: String = "0%", alignment: LVAlignment = .center, xOffset: Int32 = 0,

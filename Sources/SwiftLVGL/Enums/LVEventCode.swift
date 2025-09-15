@@ -79,7 +79,7 @@ public enum LVEventCode: Int {
   }
 }
 
-extension UnsafeMutablePointer<lv_event_t> {
+extension OpaquePointer {
   public var eventCode: LVEventCode? {
     let rawValue = Int(lv_event_get_code(self).rawValue)
     return LVEventCode(rawValue: rawValue)

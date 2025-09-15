@@ -10,7 +10,7 @@ import CLVGL
 /// A protocol that defines the interface for LVGL objects.
 public protocol LVGLObjectProtocol {
   /// The pointer to the underlying LVGL object.
-  var pointer: UnsafeMutablePointer<lv_obj_t>? { get set }
+  var pointer: OpaquePointer? { get set }
 
   /// Sets the x-coordinate of the object's position.
   /// - Parameter x: The new x-coordinate.
@@ -85,11 +85,11 @@ public protocol LVGLObjectProtocol {
 
   /// Gets the parent object.
   /// - Returns: A pointer to the parent object, or nil if there is no parent.
-  func getParent() -> UnsafeMutablePointer<lv_obj_t>?
+  func getParent() -> OpaquePointer?
 
   /// Sets the parent of the object.
   /// - Parameter parentPointer: A pointer to the new parent object.
-  func setParent(parentPointer: UnsafeMutablePointer<lv_obj_t>)
+  func setParent(parentPointer: OpaquePointer)
 
   /// Sets a callback for a specific event type.
   /// - Parameters:
@@ -97,7 +97,7 @@ public protocol LVGLObjectProtocol {
   ///   - callback: The callback function to be called when the event occurs.
   func setCallback(
     eventType: LVEventCode,
-    callback: @escaping (UnsafeMutablePointer<lv_event_t>?) -> Void)
+    callback: @escaping (OpaquePointer?) -> Void)
 
   /// Removes the previously set callback.
   func removeCallback()
@@ -116,7 +116,7 @@ public protocol LVGLObjectProtocol {
       func isLayoutPositioned() -> bool // lv_obj_is_layout_positioned
       func setLayoutAsDirty() // lv_obj_mark_layout_as_dirty
       func updateLayout() // lv_obj_update_layout
-      func align(to: UnsafeMutablePointer<lv_obj_t>? = nil, alignment: LVAlignment, xOffset: Int32, yOffset: Int32) // lv_obj_align_to
+      func align(to: OpaquePointer? = nil, alignment: LVAlignment, xOffset: Int32, yOffset: Int32) // lv_obj_align_to
       func copyCoords(area to: UnsafeMutablePointer<lv_area_t>) // lv_obj_get_coords
 
       // Get Coords lv_obj_get_x, lv_obj_get_x2, lv_obj_get_y, lv_obj_get_y2, lv_obj_get_x_aligned, lv_obj_get_y_aligned
